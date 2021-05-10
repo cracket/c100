@@ -30,9 +30,11 @@ In progress?
 https://github.com/Maccraft123/Cadmium
 
 
+
+
 ##### Imagebuilder
-sd image for veyron  
-not confirmed to work on c100  
+sd image for multiple veyron machines and other chromebooks  
+works on c100 - but without wifi and bluetooth  
 https://github.com/hexdump0815/imagebuilder
 
 
