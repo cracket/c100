@@ -22,20 +22,27 @@ No firmware packages supported
 
 
 ##### ShrimpOS
-Looks like this fork of PrawnOS was anandoned in favor of CadmiumOS
+Looks like this fork of PrawnOS was abandoned in favor of CadmiumOS
 
 
 ##### CadmiumOS
 In progress?
 https://github.com/Maccraft123/Cadmium
 
-
+##### Crawfish OS
+in progress?
+https://github.com/austin987/crawfishos/
 
 
 ##### Imagebuilder
-sd image for multiple veyron machines and other chromebooks  
-works on c100 - but without wifi and bluetooth  
-https://github.com/hexdump0815/imagebuilder
+sd image for multiple veyron machines and other chromebooks (ubuntu)  
+works on c100 - but without bluetooth  
+https://github.com/hexdump0815/
+
+#### eballetbo
+another engine to generate chromebook images
+https://github.com/eballetbo/chromebooks
+
 
 
 

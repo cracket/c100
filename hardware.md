@@ -1,8 +1,20 @@
-#Asus chromebook c100 flip hardware
+# Asus chromebook c100 flip hardware
 
+Similar devices: chromebook veyron veyron_pinky - they share same CPU rk3288 but can have different peripherals (bt, screen etc)
 
-##CPU:   
-rockchip rk3288 arm7 armhf  
+## CPU:   
+rockchip rk3288 arm7 armhf.   
+ 
+
+https://rockchip.fr/RK3288%20TRM/
+
+Mainline kernel status:  
+http://opensource.rock-chips.com/wiki_Status_Matrix
+
+Rockchip proprietary kernel tree:  
+https://github.com/rockchip-linux
+ 
+
 
 ##WiFi
 
