@@ -1,5 +1,5 @@
 # c100
-Asus Chromebook c100 flip veyron
+Asus Chromebook c100 flip veyron rockchip 3288 rk3288 
 
 Links related to c100 kernel and hardware support:
 
