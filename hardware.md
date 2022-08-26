@@ -2,177 +2,73 @@
 
 Similar devices: chromebook veyron veyron_pinky - they share same CPU rk3288 but can have different peripherals (bt, screen etc)
 
+## CPU FEATURS:   
+
+rockchip rk3288 arm7 armhf - see  https://rockchip.fr/RK3288%20TRM/  and https://rockchip.fr/RK3288%20datasheet%20V2.4.pdf  
+
 
 #### Documentation
 https://rockchip.fr/RK3288%20TRM/
 
+Hardware specs relevant for linux kernel:
 #### Kernel
 Mainline kernel status:  
 http://opensource.rock-chips.com/wiki_Status_Matrix
-
 Rockchip proprietary kernel tree:  
 https://github.com/rockchip-linux
 
-
-
-## CPU   
-rockchip rk3288 arm7 armhf.   
-
- 
-
-
 ## PLATFORM
+1.1.4 External Memory or storage  
+- Nand Flash
+- eMMC
+- SD/MMC ver 4.5 
 
-#### PWM
+1.1.5 System Component
+- PMU 
+- Watchdog   (Synopsys DesignWare Watchdog dw_wdt)
+- Bus AXI/AHB/APB    (AMBA5 ?)
+- DMAC   (PL330 DMAC-241330)
+- crypto:
+    - Support AES-128/192/256 with ECB, CBC, OFB, CTR, CBC-MAC, CMAC, XCBC-MAC, XTS and CCM modes
+    - Supports SHA-1, SHA-256 and SHA-512 modes, as well as HMAC
+- Trustzone technology support
+- Internal on-chip memory:
+    - 20KB BootRom
+    - 100KB internal SRAM for security and non-security access, detailed size is programmable
+- CPU up to 2.2GHz      (freq scaling)
+    
+1.1.6 Video Codec
+- decoder:  H264  4K/24fps HighProfile 5.2,  MPEG4 HD/60fps  (0xff660000 ?)
+- encoder:  H264  HD/30fps   (Hantro H1  hantro-vpu)
 
-See https://rockchip.fr/RK3288%20TRM/rk3288-chapter-51-pulse-width-modulation-(pwm).pdf
+1.1.7 HEVC Decoder
+- H265 4K/60fps
 
- 
-#### ADC - SARADC, TSADC
+1.1.8 JPEG Codec
+- decoder/encoder 8K
 
-* Temperature Sensor(TS-ADC)
+1.1.10 Graphics Engine
+- 3D High performance OpenGL ES1.1/2.0/3.0, OpenCL 1.1, DirectX 11
+- 2D BitBlit 8K
 
-    3 bipolar-based temperature-sensing cell embedded
-    3-channel 12-bits SAR ADC
-    Temperature accuracy sensed is ±5 degree
-    SAR-ADC clock must be less than 50KHz  
-    Power Down Current is about 1uA for anolog and 2uA for digital logic
-* SAR-ADC(Successive Approximation Register) 
+1.1.12 HDMI
+- HDMI TX 2.0,   4K@60Hz, 10-bit Deep Color  (DesignWare HDMI  dwhdmi-rockchip)
 
-3-channel single-ended 10-bit SAR analog-to-digital converter
-Conversion speed range is up to 1 MSPS
-SAR-ADC clock must be less than 1MHz
-DNL is less than ±1 LSB , INL is   less than ±2.0 LSB
-Power down current is about 0.5uA for analog and digital logic
-Power supply is 1.8V (±10%) for analog interface
+1.1.17 Connectivity
+- Uart controller (bluetooth hci)
+- USB Host 2.0
 
-See https://rockchip.fr/RK3288%20TRM/rk3288-chapter-45-sar-adc.pdf
+1.1.18 Others
+- eFuse 256bits (32x8) and 1024bits (32x32)
 
-See https://rockchip.fr/RK3288%20TRM/rk3288-chapter-46-temperature-sensor-adc(ts-adc).pdf
+8.1 Core system
+- PL301 interconnect
+- GIC400 interrupt controller
 
-#### WATCHDOG
-
-* 32 bits watchdog counter width
-* Counter clock is from apb bus clock
-* Counter counts down from a preset value to 0 to indicate the occurrence of a timeout 
-* WDT can perform two types of operations when timeout occurs:Generate a system reset, First generate an interrupt and if this is not cleared by the service routine by the time a second timeout occurs then generate a system reset
-* Programmable reset pulse length
-* Totally 16 defined-ranges of main timeout period
-
-See https://rockchip.fr/RK3288%20TRM/rk3288-chapter-50-watchdog.pdf
-
-
-#### EFUSE
-
-* Two high-density electrical Fuse is integrated: 256bits (32x8) / 1024bits (32x32)
-* Support standby mode
-
-#### TIMER
-
-See https://rockchip.fr/RK3288%20TRM/rk3288-chapter-47-timer.pdf
-
-
-#### Unused 
-GPS  
-MIPI-CSI, 
-ISP 
+Watchdog: dw_wdt
 
 
-## GPU & DISPLAY
-
-
-#### 3D ENGINE 
-* High performance OpenGL ES1.1/2.0/3.0, OpenCL 1.1, DirectX 11 etc.
-* Embedded 4 shader cores with shared hierarchical tiler
-* Provide MMU and L2 Cache with 256KB size
-* Image quality using double-precision FP64, and anti-aliasing
-
-
-
-#### 2D ENGINE  (RGA)
-
-See https://rockchip.fr/RK3288%20TRM/rk3288-chapter-28-rga2.pdf
-
-#### IEP - Image Enhancement Processor
-
-See https://rockchip.fr/RK3288%20TRM/rk3288-chapter-29-image-enhancement-processor-(iep).pdf
-
-
-#### Video Codec
-
-###### Video Decoder 
-
-* Real-time video decoder of MPEG-1, MPEG-2, MPEG-4, H.263, H.264, AVS, VC-1, RV, VP6/VP8, Sorenson Spark, MVC 
-
-###### Video Encoder
-
-* Support video encoder for H.264 (BP@level4.0, MP@level4.0, HP@level4.0), MVC and VP8
-* Only support I and P slices, not B slices
-
-See https://rockchip.fr/RK3288%20TRM/rk3288-chapter-25-video-encoder-decoder-unit-(vcodec).pdf
-
-#### IEP - Image Enhancement
-* Image pre-processor for Video Encoder
-* Video stabilization (for Video Encoder)
-* Image post-processor (for Video Decoder and JPEG codec)
-* Image enhancement processor
-
-
-#### HEVC Decoder
-
-* Main/Main10 HEVC/H.265 decoderof 4k@60FPS
-* Support up to 4096x2304 resolution
-* Support up to 100Mbps bit rate 
-* Embedded memory management unit(MMU) 
-* Stream error detector (28 IDs) 
-* Internal 128k cache for bandwidth reduction
-* Multi-clock domains and auto clock-gating design for power saving
-
-
-#### VPU JPEG Codec
-
-#### VOP DRM Display
-
-
-###### eDP
-
-
-###### HDMI
-Up to 1080p at 120 Hz and 4k x 2k at 60 Hz HDTV display resolutions and up to QXGA graphic display resolutions
-
-
-
-## BUS DEVICES
-
-#### SD/SDIO/MMC BUS
-SD3.0 4bit  eMMC 4.5
-
-#### I2S BUS
-
-
-See https://rockchip.fr/RK3288%20TRM/rk3288-chapter-16-i2s-pcm-controller-(8-channel).pdf
-
-#### I2C BUS
-* pmic 
-* tpm 
-* max98090?
-* elants_i2c
-* ekth3000
-* ts3a227e
-* bq27500
-
-
-#### SPI BUS
-* spi-nor memory
-
-
-#### USB BUS
-* UART
-* Camera
-
-
-
-##WiFi
+## WiFi
 
 Original drivers Cypress/Broadcom drivers (registration needed):    
 https://www.cypress.com/documentation/software-and-drivers-archive/wifi-bt-linux-archive
@@ -185,6 +81,51 @@ https://www.cypress.com/documentation/software-and-drivers-archive/wifi-bt-linux
      CONFIG_BRCMFMAC_SDIO=y  
 
 modules:  
+
+
+
+## BUS DEVICES
+
+#### SD/SDIO/MMC BUS
+SD3.0 4bit  eMMC 4.5
+mmc0: flash 16 MB HAG2e
+mmc1: SDR104 SDIO 148MHz (microSD card)
+mmc2: SDR104 SDIO 148MHz (Brodacom Wifi)
+
+#### I2S BUS
+max98090
+
+
+
+See https://rockchip.fr/RK3288%20TRM/rk3288-chapter-16-i2s-pcm-controller-(8-channel).pdf
+
+#### I2C BUSes
+rk3x-i2c
+* i2c-0 rk808 pmic + rtc0
+* i2c-1 tpm_i2c_infineon (tpm)
+* i2c-2 max98090 (sound card)
+* i2c-3 elants_i2c (touchscreen)
+* i2c-4 ekth3000 (touchpad)
+* i2c-4 ts3a227e (headphones jack detector)
+
+cros-ec-i2c-tunel (via spi0) 
+* i2c-20 bq27500 (battery)
+
+rockchip-dp (eDP)
+* i2c-21 DP-AUX
+
+rk3288-dw-hdmi (HDMI)
+* i2c-22 DesignWare HDMI (ddc)
+
+#### SPI BUS
+* spi0.0 - Embedded Controller (EC) - keyboard 
+* spi2.0 - spi-nor memory (mtd0) 4MB gigadevice gd25q32 (coreboot)
+
+
+#### USB BUS
+* EHCI USB Hub
+* Camera  13d3:5662 IMC Networks USB2.0 HD UVC WebCam
+
 
 
 #### kali blob
@@ -211,7 +152,7 @@ BCM4354 UART 37.4 MHz wlbga_54z_iLNA
 81417 bytes  
 
 
-##Bluetooth
+## Bluetooth
 The key to set up bluetooth are exotic kernel options/modules for hci serial AND dtb from chromium os
 (mainline dtb sucks, mainline kernel  sources5.x is OK)  
 
@@ -240,12 +181,25 @@ https://unix.stackexchange.com/questions/498473/why-is-bluetooth-not-working-on-
 
 
 NO FIRMWARE NEEDED! Just firmware for wifi (bin+nvram) from kali
+Radio FM and GPS from BCM4354 is not supported
+
+
+
+## Touchpad & Touchscreen
+Elan touchpad&touchscreen I2S
+
+## Camera
+USB Camera  
+
+
+## TPM
+Infineon I2C
 
 
 
 
-
-
+Mainline kernel status:  
+http://opensource.rock-chips.com/wiki_Status_Matrix
 
 
 
